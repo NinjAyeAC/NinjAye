@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-labelledby="title description">
+  <title id="title">NinjAye client protection platform</title>
+  <desc id="description">A dark technical banner showing the NinjAye native client, challenge protocol, API and PostgreSQL architecture.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07131f"/>
+      <stop offset="0.55" stop-color="#0b2030"/>
+      <stop offset="1" stop-color="#102b35"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#45f0c2"/>
+      <stop offset="1" stop-color="#60a5fa"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#8ecae6" stroke-opacity="0.08" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="320" rx="24" fill="url(#background)"/>
+  <rect width="1200" height="320" rx="24" fill="url(#grid)"/>
+  <path d="M0 260 C210 185 330 330 565 243 S940 145 1200 222 L1200 320 L0 320Z" fill="#45f0c2" fill-opacity="0.06"/>
+  <circle cx="1040" cy="58" r="138" fill="#45f0c2" fill-opacity="0.05"/>
+  <circle cx="1040" cy="58" r="94" fill="none" stroke="#45f0c2" stroke-opacity="0.18"/>
+  <circle cx="1040" cy="58" r="50" fill="none" stroke="#60a5fa" stroke-opacity="0.28"/>
+  <g transform="translate(66 62)">
+    <rect width="76" height="76" rx="20" fill="#0d3440" stroke="#45f0c2" stroke-width="2"/>
+    <path d="M20 51 L38 15 L56 51 L46 51 L38 34 L30 51Z" fill="url(#accent)" filter="url(#glow)"/>
+    <circle cx="38" cy="57" r="5" fill="#e8fbff"/>
+  </g>
+  <text x="164" y="101" fill="#f0fbff" font-family="Segoe UI, Arial, sans-serif" font-size="54" font-weight="750" letter-spacing="1">NinjAye</text>
+  <text x="166" y="137" fill="#8edbd0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600" letter-spacing="3">CLIENT PROTECTION PLATFORM</text>
+  <text x="166" y="181" fill="#b4cad3" font-family="Segoe UI, Arial, sans-serif" font-size="19">Native challenge protocol, runtime detections and controlled reporting.</text>
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="650">
+    <rect x="166" y="213" width="148" height="42" rx="21" fill="#0b2932" stroke="#2f7b75"/>
+    <text x="240" y="240" text-anchor="middle" fill="#9ff5df">C++20 / Win32</text>
+    <rect x="329" y="213" width="134" height="42" rx="21" fill="#0b2932" stroke="#3f6c9d"/>
+    <text x="396" y="240" text-anchor="middle" fill="#b8d9ff">.NET 8 API</text>
+    <rect x="478" y="213" width="174" height="42" rx="21" fill="#0b2932" stroke="#39789f"/>
+    <text x="565" y="240" text-anchor="middle" fill="#b8e4ff">PostgreSQL 16</text>
+  </g>
+  <g transform="translate(760 179)">
+    <circle cx="0" cy="35" r="7" fill="#45f0c2"/>
+    <circle cx="82" cy="35" r="7" fill="#60a5fa"/>
+    <circle cx="164" cy="35" r="7" fill="#45f0c2"/>
+    <path d="M8 35 H74 M90 35 H156" stroke="url(#accent)" stroke-width="3" stroke-linecap="round"/>
+    <rect x="-42" y="53" width="84" height="28" rx="8" fill="#0b202b" stroke="#31576a"/>
+    <rect x="40" y="53" width="84" height="28" rx="8" fill="#0b202b" stroke="#31576a"/>
+    <rect x="122" y="53" width="84" height="28" rx="8" fill="#0b202b" stroke="#31576a"/>
+    <text x="0" y="72" text-anchor="middle" fill="#b6ced8" font-family="Segoe UI, Arial, sans-serif" font-size="12">GAME SERVER</text>
+    <text x="82" y="72" text-anchor="middle" fill="#b6ced8" font-family="Segoe UI, Arial, sans-serif" font-size="12">CLIENT DLL</text>
+    <text x="164" y="72" text-anchor="middle" fill="#b6ced8" font-family="Segoe UI, Arial, sans-serif" font-size="12">INGESTION</text>
+  </g>
+</svg>

@@ -1,0 +1,65 @@
+# Visual Studio and IDE state
+.vs/
+**/.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.opendb
+.vscode/
+.idea/
+
+# Native and .NET build output
+build/
+**/build/
+**/bin/
+**/obj/
+**/TestResults/
+*.obj
+*.o
+*.ilk
+*.idb
+*.pdb
+*.ipdb
+*.iobj
+*.lastbuildstate
+*.tlog
+*.log
+
+# Local test state
+.smoke/
+coverage/
+coverage.*
+*.trx
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.pfx
+*.p12
+*.key
+config/ninjaye-dev-private.pem
+config/ninjaye-dev-public.pem
+client/dll/src/ninjaye_public_key.h
+
+# Temporary files and packages
+*.tmp
+*.temp
+*.bak
+*.cache
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# OS metadata
+Thumbs.db
+Desktop.ini
+.DS_Store

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="public_api">
+      <UniqueIdentifier>{A1000000-0000-0000-0000-000000000001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bridge">
+      <UniqueIdentifier>{A2000000-0000-0000-0000-000000000002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{A3000000-0000-0000-0000-000000000003}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="runtime_events">
+      <UniqueIdentifier>{A4000000-0000-0000-0000-000000000004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="identity">
+      <UniqueIdentifier>{A5000000-0000-0000-0000-000000000005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="detection">
+      <UniqueIdentifier>{A6000000-0000-0000-0000-000000000006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="process_collection">
+      <UniqueIdentifier>{AB000000-0000-0000-0000-00000000000B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="input_telemetry">
+      <UniqueIdentifier>{A7000000-0000-0000-0000-000000000007}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="networking_crypto">
+      <UniqueIdentifier>{A8000000-0000-0000-0000-000000000008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="splash">
+      <UniqueIdentifier>{A9000000-0000-0000-0000-000000000009}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="documentation">
+      <UniqueIdentifier>{AA000000-0000-0000-0000-00000000000A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\ninjaye.h">
+      <Filter>public_api</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ninjaye_bridge.h">
+      <Filter>public_api</Filter>
+    </ClInclude>
+    <ClInclude Include="src\bridge_runtime.h">
+      <Filter>bridge</Filter>
+    </ClInclude>
+    <ClInclude Include="src\detection_codes.h">
+      <Filter>detection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\detection_engine.h">
+      <Filter>detection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\detection_groups.h">
+      <Filter>detection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\detection_policy.h">
+      <Filter>detection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\encoded_strings.h">
+      <Filter>networking_crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="src\http_client.h">
+      <Filter>networking_crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="src\identity_engine.h">
+      <Filter>identity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\input_capture.h">
+      <Filter>input_telemetry</Filter>
+    </ClInclude>
+    <ClInclude Include="src\input_detection.h">
+      <Filter>input_telemetry</Filter>
+    </ClInclude>
+    <ClInclude Include="src\json_utils.h">
+      <Filter>networking_crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module_classifier.h">
+      <Filter>detection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ninjaye_public_key.h">
+      <Filter>networking_crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="src\process_collection.h">
+      <Filter>process_collection</Filter>
+    </ClInclude>
+    <ClInclude Include="src\runtime_event_codes.h">
+      <Filter>runtime_events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\runtime_events.h">
+      <Filter>runtime_events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\runtime_identity.h">
+      <Filter>identity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\splash_window.h">
+      <Filter>splash</Filter>
+    </ClInclude>
+    <ClInclude Include="src\static_client_config.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wire_protocol.h">
+      <Filter>networking_crypto</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\detection_engine.cpp">
+      <Filter>detection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bridge_runtime.cpp">
+      <Filter>bridge</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dllmain.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\http_client.cpp">
+      <Filter>networking_crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="src\identity_engine.cpp">
+      <Filter>identity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\input_capture.cpp">
+      <Filter>input_telemetry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\input_detection.cpp">
+      <Filter>input_telemetry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\json_utils.cpp">
+      <Filter>networking_crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module_classifier.cpp">
+      <Filter>detection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ninjaye.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\process_collection.cpp">
+      <Filter>process_collection</Filter>
+    </ClCompile>
+    <ClCompile Include="src\splash_window.cpp">
+      <Filter>splash</Filter>
+    </ClCompile>
+    <ClCompile Include="src\static_client_config.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wire_protocol.cpp">
+      <Filter>networking_crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="src\runtime_identity.cpp">
+      <Filter>identity</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md">
+      <Filter>documentation</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ninjaye
+      POSTGRES_USER: ninjaye
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+    volumes:
+      - ninjaye_postgres:/var/lib/postgresql/data
+      - ./database/001_init.sql:/docker-entrypoint-initdb.d/001_init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ninjaye -d ninjaye"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  server:
+    build:
+      context: .
+      dockerfile: server/NinjAye.Server/Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_URLS: http://0.0.0.0:8080
+      NinjAye__Storage: postgres
+      NinjAye__PrivateKeyPath: /run/secrets/ninjaye-private.pem
+      NinjAye__Reserved2__0: ${NINJAYE_RESERVED2_MD5_0:-}
+      NinjAye__Reserved50: ${NINJAYE_RESERVED50:-262144}
+      ConnectionStrings__Postgres: Host=postgres;Port=5432;Database=ninjaye;Username=ninjaye;Password=${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+    volumes:
+      - ./config/ninjaye-dev-private.pem:/run/secrets/ninjaye-private.pem:ro
+    ports:
+      - "${NINJAYE_SERVER_HOST_PORT:-5088}:8080"
+
+volumes:
+  ninjaye_postgres:

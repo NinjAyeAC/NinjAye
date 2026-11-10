@@ -1,0 +1,48 @@
+name: Bug report
+description: Report a reproducible build, protocol or runtime defect.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Do not attach private keys, live tokens, third-party game binaries,
+        unredacted captures or personal data.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What failed, and what behavior did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Use synthetic data and a minimal sequence.
+      placeholder: |
+        1. Run ...
+        2. Build ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Revision
+      description: Commit, tag or branch.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Windows version, Visual Studio/MSVC, .NET, Docker and PostgreSQL versions.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Sanitized diagnostics
+      description: Relevant logs without secrets or machine identifiers.

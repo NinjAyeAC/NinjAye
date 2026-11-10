@@ -1,0 +1,144 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  server:
+    name: server-build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        run: dotnet restore server/NinjAye.Server/NinjAye.Server.csproj
+
+      - name: Build
+        run: >-
+          dotnet build server/NinjAye.Server/NinjAye.Server.csproj
+          --configuration Release
+          --no-restore
+          -warnaserror
+
+      - name: Verify formatting
+        run: >-
+          dotnet format server/NinjAye.Server/NinjAye.Server.csproj
+          --verify-no-changes
+          --severity warn
+          --no-restore
+
+  native:
+    name: native-${{ matrix.platform }}
+    runs-on: windows-2022
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - x64
+          - Win32
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Add MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Generate ephemeral development keys
+        shell: pwsh
+        run: ./scripts/generate-dev-keys.ps1 -Force
+
+      - name: Build native projects
+        shell: pwsh
+        run: |
+          $solutionDirectory = $env:GITHUB_WORKSPACE.TrimEnd('\') + '\'
+          msbuild ./client/sdk/example/NinjAye.Example.vcxproj `
+            /m `
+            /p:Configuration=Release `
+            /p:Platform=${{ matrix.platform }} `
+            /p:PlatformToolset=v143 `
+            "/p:SolutionDir=$solutionDirectory" `
+            /warnAsError `
+            /v:minimal
+
+  integration:
+    name: end-to-end
+    runs-on: windows-2022
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Add MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Start PostgreSQL
+        shell: pwsh
+        run: |
+          $postgresRoot = if ($env:PGROOT) {
+            $env:PGROOT
+          } else {
+            'C:\Program Files\PostgreSQL\14'
+          }
+          $postgresData = if ($env:PGDATA) {
+            $env:PGDATA
+          } else {
+            'C:\PostgreSQL\14\data'
+          }
+          $postgresLog = Join-Path $env:RUNNER_TEMP 'postgres.log'
+          $password = [Convert]::ToHexString(
+            [Security.Cryptography.RandomNumberGenerator]::GetBytes(24)
+          )
+          $env:PGPASSWORD = 'root'
+          & "$postgresRoot\bin\pg_ctl.exe" `
+            start `
+            -D $postgresData `
+            -l $postgresLog `
+            -w
+          & "$postgresRoot\bin\psql.exe" `
+            -h 127.0.0.1 `
+            -U postgres `
+            -d postgres `
+            -v ON_ERROR_STOP=1 `
+            -c "CREATE USER ninjaye_ci LOGIN PASSWORD '$password';"
+          & "$postgresRoot\bin\createdb.exe" `
+            -h 127.0.0.1 `
+            -U postgres `
+            -O ninjaye_ci `
+            ninjaye_ci
+          Add-Content `
+            -Path $env:GITHUB_ENV `
+            -Value "NINJAYE_TEST_POSTGRES_PASSWORD=$password"
+
+      - name: Run integration harness
+        shell: pwsh
+        env:
+          NINJAYE_PLATFORM_TOOLSET: v143
+        run: ./tests/run_end_to_end.ps1 -NativeServer
